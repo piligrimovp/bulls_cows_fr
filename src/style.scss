@@ -1,0 +1,200 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+
+img {
+  max-width: 100%;
+}
+
+.bcg {
+  background: $gray-200;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.all-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.no-shadow, .no-shadow:focus {
+  box-shadow: none;
+}
+
+.game {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% + 30px));
+
+  input:not([type='checkbox']) {
+    font-size: 2rem;
+    height: 40px;
+    width: 40px;
+  }
+
+  &-tooltip {
+      font-size: 1.1rem;
+  }
+}
+
+@keyframes fadeOutDown {
+  0% {
+    opacity: 1;
+    position: absolute;
+  }
+
+  50% {
+    opacity: 0;
+    position: absolute;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  100% {
+    opacity: 0;
+    position: absolute;
+    transform: translate3d(0, 0, 0);
+    overflow: hidden;
+  }
+}
+
+@-webkit-keyframes fadeOutDown {
+  0% {
+    opacity: 1;
+    position: absolute;
+  }
+
+  50% {
+    opacity: 0;
+    position: absolute;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  100% {
+    opacity: 0;
+    position: absolute;
+    transform: translate3d(0, 0, 0);
+    overflow: hidden;
+  }
+}
+
+.history {
+  .form-control[readonly] {
+    background: $white;
+  }
+}
+
+@media (max-width: 992px) {
+  .history {
+    margin-top: 0.5rem;
+
+    .form-control[readonly] {
+      background: $white;
+    }
+  }
+
+  .btn_motion {
+    margin-top: 0.5rem;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.header {
+  &__wrap {
+    justify-content: center!important;
+  }
+
+  &_logo {
+    max-width: 150px;
+    margin-right: 20px;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  &_menu {
+    &-up {
+      &_gameButton {
+        display: none;
+      }
+    }
+  }
+
+  &_menu__wrap {
+    justify-content: center;
+    font-size: 1.2rem;
+    text-align: center;
+    width: auto;
+  }
+}
+
+.header-block {
+  .header {
+
+    &__wrap {
+      flex-direction: column-reverse;
+      flex: 0 0 50%;
+      max-width: 50%;
+      height: 100vh;
+      justify-content: center !important;
+      position: relative;
+    }
+
+    &_logo {
+      max-width: 300px;
+      height: auto;
+
+      img {
+        max-width: 100%;
+      }
+    }
+
+    &_menu__wrap {
+      justify-content: center;
+      padding-right: 0;
+      width: 100%;
+      font-size: 1.2rem;
+    }
+
+    &_menu {
+      display: none;
+
+      &-up {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &_gameButton {
+          display: block;
+        }
+      }
+    }
+
+    &_title {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.filter-block {
+  position: absolute;
+  z-index: 10;
+  background: $white;
+  box-shadow: $box-shadow;
+  border: 1px solid $gray-400;
+  width: 250px;
+  top: 30px;
+  padding: 1rem;
+
+  .form-check {
+    &-label {
+      margin-left: 10px;
+      vertical-align: text-top;
+    }
+  }
+}

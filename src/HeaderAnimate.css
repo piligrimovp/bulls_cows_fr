@@ -1,0 +1,116 @@
+.header.header-animate .header_logo,
+.header.header-block.header-animate .header_logo {
+  animation: headerAnimateLogo 1s ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 0.5s;
+}
+.header.header-animate .header__wrap,
+.header.header-block.header-animate .header__wrap {
+  animation: headerAnimate 1s ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 0.3s;
+}
+.header.header-animate .header_title,
+.header.header-block.header-animate .header_title {
+  animation: headerAnimateTitle 1s ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 0.5s;
+}
+.header.header-animate .header_menu-up_gameButton,
+.header.header-block.header-animate .header_menu-up_gameButton {
+  animation: headerAnimateGameButton 1s ease-in-out;
+  animation-fill-mode: forwards;
+}
+.header.header-animate .header_menu,
+.header.header-block.header-animate .header_menu {
+  animation: headerAnimateMenu 1.3s ease-in-out;
+  animation-fill-mode: forwards;
+  display: flex;
+  opacity: 0;
+}
+.header.header-animate .header_menu-up,
+.header.header-block.header-animate .header_menu-up {
+  animation: headerAnimateMenuUp 1s ease-in-out;
+  animation-fill-mode: forwards;
+}
+.header.header-animate .header_menu__wrap,
+.header.header-block.header-animate .header_menu__wrap {
+  animation: headerAnimateMenuWrap 1s ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes headerAnimateLogo {
+  100% {
+    max-width: 150px;
+  }
+}
+@keyframes headerAnimate {
+  30% {
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    flex: none;
+  }
+  100% {
+    height: 159px;
+    flex-direction: inherit;
+    flex-wrap: wrap;
+    flex: none;
+  }
+}
+@keyframes headerAnimateTitle {
+  100% {
+    font-size: 2.5rem;
+  }
+}
+@keyframes headerAnimateMenu {
+  0% {
+    opacity: 0;
+    position: absolute;
+  }
+  50% {
+    opacity: 0;
+    position: relative;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes headerAnimateGameButton {
+  0% {
+    opacity: 1;
+    margin-left: calc(100% - 271px);
+  }
+  60% {
+    opacity: 0;
+  }
+  80% {
+    margin-left: 0;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+  }
+}
+@keyframes headerAnimateMenuUp {
+  0% {
+    justify-content: center;
+  }
+  100% {
+    justify-content: center;
+  }
+}
+@keyframes headerAnimateMenuWrap {
+  0% {
+    width: auto;
+  }
+  100% {
+    width: auto;
+  }
+}
+
+/*# sourceMappingURL=HeaderAnimate.css.map */
