@@ -6,43 +6,63 @@ $animateTimeWithDelay: 1.3s;
 .header.header-animate,
 .header.header-block.header-animate {
   .header_logo {
+    -webkit-animation: headerAnimateLogo $animateTime ease-in-out;
     animation: headerAnimateLogo $animateTime ease-in-out;
+    -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
+    -webkit-animation-delay: $animateTimeDelay;
     animation-delay: $animateTimeDelay;
   }
 
   .header__wrap {
+    -webkit-animation: headerAnimate $animateTime ease-in-out;
     animation: headerAnimate $animateTime ease-in-out;
+    -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
+    -webkit-animation-delay: $animateDelay;
     animation-delay: $animateDelay;
   }
 
   .header_title {
+    -webkit-animation: headerAnimateTitle $animateTime ease-in-out;
     animation: headerAnimateTitle $animateTime ease-in-out;
+    -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
+    -webkit-animation-delay: $animateTimeDelay;
     animation-delay: $animateTimeDelay;
   }
 
   .header_menu-up_gameButton {
+    -webkit-animation: headerAnimateGameButton $animateTime ease-in-out;
     animation: headerAnimateGameButton $animateTime ease-in-out;
+    -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
   }
 
   .header_menu {
+    -webkit-animation: headerAnimateMenu $animateTimeWithDelay ease-in-out;
     animation: headerAnimateMenu $animateTimeWithDelay ease-in-out;
+    -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     opacity: 0;
   }
 
   .header_menu-up {
+    -webkit-animation: headerAnimateMenuUp $animateTime ease-in-out;
     animation: headerAnimateMenuUp $animateTime ease-in-out;
+    -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
   }
 
   .header_menu__wrap {
+    -webkit-animation: headerAnimateMenuWrap $animateTime ease-in-out;
     animation: headerAnimateMenuWrap $animateTime ease-in-out;
+    -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
+    -webkit-animation-delay: $animateTimeDelay;
     animation-delay: $animateTimeDelay;
   }
 }
@@ -51,31 +71,90 @@ $animateTimeWithDelay: 1.3s;
 @keyframes headerAnimateLogo {
   0% {
 
-     }
+  }
+
+  80% {
+    max-width: 150px;
+  }
 
   100% {
     max-width: 150px;
   }
 }
 
-@keyframes headerAnimate {
+@-webkit-keyframes headerAnimate {
   30% {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
     flex-direction: column-reverse;
     flex-wrap: wrap;
+    -webkit-box-flex: 0;
     flex: none;
   }
 
   100% {
     height: 159px;
+    -webkit-box-orient: inherit;
+    -webkit-box-direction: inherit;
     flex-direction: inherit;
     flex-wrap: wrap;
+    -webkit-box-flex: 0;
     flex: none;
+  }
+}
+
+@keyframes headerAnimate {
+  30% {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-flex: 0;
+    -ms-flex: none;
+    flex: none;
+  }
+
+  100% {
+    height: 159px;
+    -webkit-box-orient: inherit;
+    -webkit-box-direction: inherit;
+    -ms-flex-direction: inherit;
+    flex-direction: inherit;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-flex: 0;
+    -ms-flex: none;
+    flex: none;
+  }
+}
+
+@-webkit-keyframes headerAnimateTitle {
+  100% {
+    font-size: 2rem;
   }
 }
 
 @keyframes headerAnimateTitle {
   100% {
-    font-size: 2.5rem;
+    font-size: 2rem;
+  }
+}
+
+@-webkit-keyframes headerAnimateMenu {
+  0% {
+    opacity: 0;
+    position: absolute;
+  }
+
+  50% {
+    opacity: 0;
+    position: relative;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
 
@@ -95,10 +174,10 @@ $animateTimeWithDelay: 1.3s;
   }
 }
 
-@keyframes headerAnimateGameButton {
+@-webkit-keyframes headerAnimateGameButton {
   0% {
     opacity: 1;
-    margin-left: calc(100% - 271px);
+    margin-left: calc(100% - 24rem);
   }
 
   60% {
@@ -120,13 +199,63 @@ $animateTimeWithDelay: 1.3s;
   }
 }
 
-@keyframes headerAnimateMenuUp {
+@keyframes headerAnimateGameButton {
   0% {
+    opacity: 1;
+    margin-left: calc(100% - 24rem);
+  }
+
+  60% {
+    opacity: 0;
+  }
+
+
+  80% {
+    margin-left: 0;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+  }
+}
+
+@-webkit-keyframes headerAnimateMenuUp {
+  0% {
+    -webkit-box-pack: center;
     justify-content: center;
   }
 
   100% {
+    -webkit-box-pack: center;
     justify-content: center;
+  }
+}
+
+@keyframes headerAnimateMenuUp {
+  0% {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+
+  100% {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+}
+
+@-webkit-keyframes headerAnimateMenuWrap {
+  0% {
+    width: auto;
+  }
+  100% {
+    width: auto;
   }
 }
 

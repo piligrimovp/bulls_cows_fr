@@ -1,5 +1,11 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+@import '../node_modules/react-s-alert/dist/s-alert-default.css';
+@import '../node_modules/react-s-alert/dist/s-alert-css-effects/slide.css';
+
+html {
+  font-size: 16px;
+}
 
 img {
   max-width: 100%;
@@ -15,10 +21,13 @@ img {
   position: absolute;
   top: 50%;
   left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
 
 .no-shadow, .no-shadow:focus {
+  -webkit-box-shadow: none;
   box-shadow: none;
 }
 
@@ -26,6 +35,8 @@ img {
   position: absolute;
   top: 50%;
   left: 50%;
+  -webkit-transform: translate(-50%, calc(-50% + 30px));
+  -ms-transform: translate(-50%, calc(-50% + 30px));
   transform: translate(-50%, calc(-50% + 30px));
 
   input:not([type='checkbox']) {
@@ -35,7 +46,7 @@ img {
   }
 
   &-tooltip {
-      font-size: 1.1rem;
+    font-size: 1.1rem;
   }
 }
 
@@ -48,12 +59,14 @@ img {
   50% {
     opacity: 0;
     position: absolute;
+    -webkit-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0);
   }
 
   100% {
     opacity: 0;
     position: absolute;
+    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     overflow: hidden;
   }
@@ -68,12 +81,14 @@ img {
   50% {
     opacity: 0;
     position: absolute;
+    -webkit-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0);
   }
 
   100% {
     opacity: 0;
     position: absolute;
+    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     overflow: hidden;
   }
@@ -100,11 +115,14 @@ img {
 }
 
 * {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 .header {
   &__wrap {
+    -webkit-box-pack: center!important;
+    -ms-flex-pack: center!important;
     justify-content: center!important;
   }
 
@@ -126,6 +144,8 @@ img {
   }
 
   &_menu__wrap {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
     font-size: 1.2rem;
     text-align: center;
@@ -137,10 +157,17 @@ img {
   .header {
 
     &__wrap {
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
       flex-direction: column-reverse;
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 50%;
       flex: 0 0 50%;
       max-width: 50%;
       height: 100vh;
+      -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
       justify-content: center !important;
       position: relative;
     }
@@ -155,6 +182,8 @@ img {
     }
 
     &_menu__wrap {
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
       justify-content: center;
       padding-right: 0;
       width: 100%;
@@ -165,8 +194,15 @@ img {
       display: none;
 
       &-up {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
         flex-direction: row;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
         justify-content: space-between;
 
         &_gameButton {
@@ -185,6 +221,7 @@ img {
   position: absolute;
   z-index: 10;
   background: $white;
+  -webkit-box-shadow: $box-shadow;
   box-shadow: $box-shadow;
   border: 1px solid $gray-400;
   width: 250px;
@@ -196,5 +233,30 @@ img {
       margin-left: 10px;
       vertical-align: text-top;
     }
+  }
+}
+
+#root .s-alert {
+
+  &-wrapper {
+    position: absolute;
+    z-index: 1100;
+  }
+
+  &-info {
+    background: $info;
+    color: #fff;
+  }
+  &-success {
+    background: $success;
+    color: #fff;
+  }
+  &-warning {
+    background: $warning;
+    color: #fff;
+  }
+  &-error {
+    background: $danger;
+    color: #fff;
   }
 }

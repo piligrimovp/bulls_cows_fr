@@ -3,6 +3,7 @@ import {Button, Container, Image, Nav, Navbar, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import logo from "../images/logo-main.png";
 import '../HeaderAnimate.css';
+import Auth from './Auth';
 
 export default class Header extends React.Component {
     constructor(props) {
@@ -40,7 +41,7 @@ export default class Header extends React.Component {
                     </Navbar.Brand>}
                     {<Row className={'header_menu__wrap flex-column'}>
                         <div className={'header_menu-up'}>
-                            <h1 className={'header_title'}>Игра "Быки и коровы"</h1>
+                            <h2 className={'header_title'}>Игра "Быки и коровы"</h2>
                             <Button className={'px-5 header_menu-up_gameButton'} onClick={this.headerRollUp}
                                     variant={"outline-primary"}>Игра</Button>
                         </div>
@@ -51,8 +52,8 @@ export default class Header extends React.Component {
                             <Nav.Link as={Link} to={'/rating'}>
                                 Рейтинг
                             </Nav.Link>
-                            <Nav.Link as={Link} to={'/auth'}>
-                                Войти
+                            <Nav.Link>
+                                <Auth {...this.props}/>
                             </Nav.Link>
                         </Nav>
                     </Row>}

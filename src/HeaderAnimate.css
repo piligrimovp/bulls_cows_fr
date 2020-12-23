@@ -1,66 +1,138 @@
 .header.header-animate .header_logo,
 .header.header-block.header-animate .header_logo {
+  -webkit-animation: headerAnimateLogo 1s ease-in-out;
   animation: headerAnimateLogo 1s ease-in-out;
+  -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
+  -webkit-animation-delay: 0.5s;
   animation-delay: 0.5s;
 }
 .header.header-animate .header__wrap,
 .header.header-block.header-animate .header__wrap {
+  -webkit-animation: headerAnimate 1s ease-in-out;
   animation: headerAnimate 1s ease-in-out;
+  -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
+  -webkit-animation-delay: 0.3s;
   animation-delay: 0.3s;
 }
 .header.header-animate .header_title,
 .header.header-block.header-animate .header_title {
+  -webkit-animation: headerAnimateTitle 1s ease-in-out;
   animation: headerAnimateTitle 1s ease-in-out;
+  -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
+  -webkit-animation-delay: 0.5s;
   animation-delay: 0.5s;
 }
 .header.header-animate .header_menu-up_gameButton,
 .header.header-block.header-animate .header_menu-up_gameButton {
+  -webkit-animation: headerAnimateGameButton 1s ease-in-out;
   animation: headerAnimateGameButton 1s ease-in-out;
+  -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
 .header.header-animate .header_menu,
 .header.header-block.header-animate .header_menu {
+  -webkit-animation: headerAnimateMenu 1.3s ease-in-out;
   animation: headerAnimateMenu 1.3s ease-in-out;
+  -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   opacity: 0;
 }
 .header.header-animate .header_menu-up,
 .header.header-block.header-animate .header_menu-up {
+  -webkit-animation: headerAnimateMenuUp 1s ease-in-out;
   animation: headerAnimateMenuUp 1s ease-in-out;
+  -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
 .header.header-animate .header_menu__wrap,
 .header.header-block.header-animate .header_menu__wrap {
+  -webkit-animation: headerAnimateMenuWrap 1s ease-in-out;
   animation: headerAnimateMenuWrap 1s ease-in-out;
+  -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
+  -webkit-animation-delay: 0.5s;
   animation-delay: 0.5s;
 }
 
 @keyframes headerAnimateLogo {
+  80% {
+    max-width: 150px;
+  }
   100% {
     max-width: 150px;
   }
 }
-@keyframes headerAnimate {
+@-webkit-keyframes headerAnimate {
   30% {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
     flex-direction: column-reverse;
     flex-wrap: wrap;
+    -webkit-box-flex: 0;
     flex: none;
   }
   100% {
     height: 159px;
+    -webkit-box-orient: inherit;
+    -webkit-box-direction: inherit;
     flex-direction: inherit;
     flex-wrap: wrap;
+    -webkit-box-flex: 0;
     flex: none;
+  }
+}
+@keyframes headerAnimate {
+  30% {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-flex: 0;
+    -ms-flex: none;
+    flex: none;
+  }
+  100% {
+    height: 159px;
+    -webkit-box-orient: inherit;
+    -webkit-box-direction: inherit;
+    -ms-flex-direction: inherit;
+    flex-direction: inherit;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-flex: 0;
+    -ms-flex: none;
+    flex: none;
+  }
+}
+@-webkit-keyframes headerAnimateTitle {
+  100% {
+    font-size: 2rem;
   }
 }
 @keyframes headerAnimateTitle {
   100% {
-    font-size: 2.5rem;
+    font-size: 2rem;
+  }
+}
+@-webkit-keyframes headerAnimateMenu {
+  0% {
+    opacity: 0;
+    position: absolute;
+  }
+  50% {
+    opacity: 0;
+    position: relative;
+  }
+  100% {
+    opacity: 1;
   }
 }
 @keyframes headerAnimateMenu {
@@ -76,10 +148,10 @@
     opacity: 1;
   }
 }
-@keyframes headerAnimateGameButton {
+@-webkit-keyframes headerAnimateGameButton {
   0% {
     opacity: 1;
-    margin-left: calc(100% - 271px);
+    margin-left: calc(100% - 24rem);
   }
   60% {
     opacity: 0;
@@ -96,12 +168,54 @@
     position: absolute;
   }
 }
-@keyframes headerAnimateMenuUp {
+@keyframes headerAnimateGameButton {
   0% {
+    opacity: 1;
+    margin-left: calc(100% - 24rem);
+  }
+  60% {
+    opacity: 0;
+  }
+  80% {
+    margin-left: 0;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+  }
+}
+@-webkit-keyframes headerAnimateMenuUp {
+  0% {
+    -webkit-box-pack: center;
     justify-content: center;
   }
   100% {
+    -webkit-box-pack: center;
     justify-content: center;
+  }
+}
+@keyframes headerAnimateMenuUp {
+  0% {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  100% {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+}
+@-webkit-keyframes headerAnimateMenuWrap {
+  0% {
+    width: auto;
+  }
+  100% {
+    width: auto;
   }
 }
 @keyframes headerAnimateMenuWrap {

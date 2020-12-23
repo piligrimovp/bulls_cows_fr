@@ -45,7 +45,7 @@ class Game extends Component {
      * @param i "Индекс input"
      */
     onChangeNumber = (i) => {
-        let digit = parseInt(this.inputRefs[i].value);
+        let digit = parseInt(this.inputRefs[i].value, 10);
         if ((/^[\d\b]$/u.test(digit) && this.state.number.indexOf(digit) === -1)) {
             let number = this.state.number;
             number[i] = digit;
@@ -116,6 +116,7 @@ class Game extends Component {
                     result.cows++;
                 }
             }
+            return null;
         });
         if (result.bulls === this.state.lengthNumber) {
             this.setState({
