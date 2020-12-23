@@ -19,11 +19,9 @@ class App extends Component {
             loading: true,
             user: {}
         }
-
-        this.getUser();
     }
 
-    getUser = () => {
+    componentDidMount() {
         getCurrentUser()
             .then(response => {
                 this.setState({

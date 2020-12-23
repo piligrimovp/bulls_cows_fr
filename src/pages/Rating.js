@@ -18,16 +18,23 @@ export default class Rating extends React.Component {
         let mode = value.target.checked ? 'user' : 'all';
         this.setState({
             mode: mode
+        }).then(() => {
+            this.updateRecords();
         })
     }
 
     componentDidMount() {
+        this.updateRecords();
+    }
+
+    updateRecords = () => {
         if (this.state.mode === 'user') {
             this.setState({
                 loading: true
             })
             getRatingUser().then(response => {
                 this.setState({
+                    loading: false,
                     records: response || []
                 });
             }).catch(error => {
@@ -42,6 +49,7 @@ export default class Rating extends React.Component {
             })
             getRatingAll().then(response => {
                 this.setState({
+                    loading: false,
                     records: response || []
                 });
             }).catch(error => {
@@ -59,7 +67,7 @@ export default class Rating extends React.Component {
                 <main>
                     <Container>
                         {!this.props.authorized && <h2 className={'text-center'}>Вы не авторизованы</h2>}
-                        {!this.props.authorized && <Row>
+                        {this.props.authorized && <Row>
                             <Col>
                                 <Form.Check
                                     type="switch"
