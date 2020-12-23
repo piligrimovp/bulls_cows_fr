@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import {Button, Col, Container, FormControl, Form, Row, OverlayTrigger, Tooltip} from "react-bootstrap";
-
 import {Animated} from 'react-animated-css'
+import {saveUserResult} from "../api/Utils";
+import Alert from 'react-s-alert';
 
 const LENGTH_NUMBER = 4;
 
@@ -88,7 +89,6 @@ class Game extends Component {
     onClickCheck = () => {
         if (this.state.number.join('').length < this.state.lengthNumber) {
             let index = this.state.number.indexOf('');
-            console.log(index)
             this.inputRefs[index].focus();
             return;
         }
@@ -122,6 +122,16 @@ class Game extends Component {
             this.setState({
                 endGame: true,
             });
+            if (this.props.authorized) {
+                saveUserResult({
+                    attempts: this.state.history.length,
+                    number: this.state.guess.join('')
+                }).then(response => {
+                    Alert.success("Результат сохранен");
+                }).catch(error => {
+                    Alert.error("Не удалось сохранить игру");
+                });
+            }
         }
         return result;
     }

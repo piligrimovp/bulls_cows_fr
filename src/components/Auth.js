@@ -127,6 +127,17 @@ export default class Auth extends React.Component {
         }
     }
 
+    inputField = (tab, input, value) => {
+        this.setState({
+            data: {
+                [tab]: {
+                    ...this.state.data[tab],
+                    [input]: value
+                }
+            }
+        })
+    }
+
     handleSubmitLogin = () => {
         let data = this.state.data.login;
         let errorsValidating = this.state.errorsValidating.login;
@@ -231,7 +242,7 @@ export default class Auth extends React.Component {
                                     </Form.Group>
                                     <Form.Group controlId="loginPassword">
                                         <Form.Label>Пароль</Form.Label>
-                                        <Form.Control type="password" placeholder="Пароль"
+                                        <Form.Control type="password" placeholder="Пароль" onChange={(e) => {this.inputField('login', 'password', e.target.value)}}
                                                       className={this.getErrorTipClass('login', 'password')}/>
                                         <Form.Text
                                             className={this.getErrorTipClass('login', 'password')}>{this.getErrorTipText('login', 'password')}</Form.Text>

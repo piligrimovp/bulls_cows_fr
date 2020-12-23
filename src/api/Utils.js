@@ -57,3 +57,25 @@ export function getUrlParameter(name, props) {
     var results = regex.exec(props.location.search);
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
+
+export function getRatingAll() {
+    return request({
+        url: API_BASE_URL + '/result/all',
+        method: 'GET',
+    })
+}
+
+export function getRatingUser() {
+    return request({
+        url: API_BASE_URL + '/result/me',
+        method: 'GET',
+    })
+}
+
+export function saveUserResult(requestData) {
+    return request({
+        url: API_BASE_URL + '/result/add',
+        method: 'POST',
+        body: JSON.stringify(requestData),
+    })
+}

@@ -5,7 +5,7 @@ import GameComponent from '../components/Game'
 export default class Game extends React.Component {
     render() {
         return <section>
-            <Header/>
+            <Header authorized={this.props.authorized} user={this.props.user}/>
             <GameComponent/>
         </section>
     }

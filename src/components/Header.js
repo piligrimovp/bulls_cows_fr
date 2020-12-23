@@ -52,9 +52,15 @@ export default class Header extends React.Component {
                             <Nav.Link as={Link} to={'/rating'}>
                                 Рейтинг
                             </Nav.Link>
-                            <Nav.Link>
-                                <Auth {...this.props}/>
-                            </Nav.Link>
+                            {!this.props.authorized && <Nav.Link>
+                                 <Auth {...this.props}/>
+                            </Nav.Link>}
+                            {this.props.authorized && <Nav.Link>
+                                {this.props.user.name}
+                            </Nav.Link>}
+                            {this.props.authorized && <Nav.Link as={Link} to={'/logout'}>
+                                Выйти
+                            </Nav.Link>}
                         </Nav>
                     </Row>}
                 </Container>
