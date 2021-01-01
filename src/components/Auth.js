@@ -1,19 +1,22 @@
 import React from "react";
-import {Modal, Button, Tab, ButtonGroup, Image, Form, Nav, Row, Col} from 'react-bootstrap';
+import {Button, ButtonGroup, Col, Form, Image, Modal, Nav, Row, Tab} from 'react-bootstrap';
 import googleImage from '../images/auth/google-logo.png';
 import '../AuthModal.css';
 import './Validators';
-import {validateEmail, validatePassword, validatePasswordConfirm, validateName} from "./Validators";
-import {ACCESS_TOKEN, GOOGLE_AUTH_URL} from '../constants';
-import {login, signup, getUrlParameter} from "../api/Utils";
+import {validateEmail, validateName, validatePassword, validatePasswordConfirm} from "./Validators";
+import {ACCESS_TOKEN, GOOGLE_AUTH_URL, USER_AUTHORIZED} from '../constants';
+import {login, signup} from "../api/Utils";
 import Alert from 'react-s-alert';
+import AuthModal from "./AuthModal";
 
-export default class Auth extends React.Component {
+class Auth extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             showModal: false,
+            showAuthModal: false,
+            externalAuthLink: null,
             errorsValidating: {
                 'login': {},
                 'signup': {}
@@ -152,6 +155,7 @@ export default class Auth extends React.Component {
                 .then(response => {
                     localStorage.setItem(ACCESS_TOKEN, response.accessToken);
                     Alert.success("Вы авторизованы!");
+                    this.context.changeState(true);
                     this.setState({
                         showModal: false
                     })
@@ -192,13 +196,33 @@ export default class Auth extends React.Component {
         }
     }
 
+    handleSocialAuth = (error = null) => {
+        if (error != null && error.length > 0) {
+            this.setState({
+                showModal: true,
+                showAuthModal: false,
+                errorsValidating: {
+                    login: {
+                        global: error
+                    }
+                }
+            })
+        } else {
+            this.setState({
+                showModal: true,
+                showAuthModal: false
+            })
+            this.context.changeState(true);
+        }
+    }
+
     render() {
         return <div>
             <span onClick={() => this.setState({showModal: true})}>Войти</span>
             <Modal
                 show={this.state.showModal}
                 onHide={() => {
-                    this.setState({showModal: false})
+                    this.setState({showModal: false, showAuthModal: false})
                 }}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -218,20 +242,21 @@ export default class Auth extends React.Component {
                     <Modal.Body>
                         <Tab.Content>
                             <Tab.Pane eventKey="login">
-                                <ButtonGroup vertical={true} className={'w-75 pr-5'}>
+                                <Form.Text
+                                    className={'text-danger mb-3'}>{this.state.errorsValidating.login.global}</Form.Text>
+                                {!this.state.showAuthModal && <ButtonGroup vertical={true} className={'w-75 pr-5'}>
                                     <Button variant={'social'} onClick={() => {
-                                        window.open(GOOGLE_AUTH_URL, '_blank')
+                                        this.setState({showAuthModal: !this.state.showAuthModal, externalAuthLink: GOOGLE_AUTH_URL})
                                     }}>
                                         <Image src={googleImage} className={'btn-social_logo'}/>
                                         Войти с помощью Google
                                     </Button>
-                                </ButtonGroup>
-                                <div className="or-separator">
+                                </ButtonGroup>}
+                                {!this.state.showAuthModal && <div className="or-separator">
                                     <span className="or-text">ИЛИ</span>
-                                </div>
+                                </div>}
+                                {this.state.showAuthModal && <AuthModal link={this.state.externalAuthLink} onClose={this.handleSocialAuth}/>}
                                 <Form>
-                                    <Form.Text
-                                        className={'text-danger mb-3'}>{this.state.errorsValidating.login.global}</Form.Text>
                                     <Form.Group controlId="loginEmail">
                                         <Form.Label>Email</Form.Label>
                                         <Form.Control type="email" placeholder="Email"
@@ -242,7 +267,9 @@ export default class Auth extends React.Component {
                                     </Form.Group>
                                     <Form.Group controlId="loginPassword">
                                         <Form.Label>Пароль</Form.Label>
-                                        <Form.Control type="password" placeholder="Пароль" onChange={(e) => {this.inputField('login', 'password', e.target.value)}}
+                                        <Form.Control type="password" placeholder="Пароль" onChange={(e) => {
+                                            this.inputField('login', 'password', e.target.value)
+                                        }}
                                                       className={this.getErrorTipClass('login', 'password')}/>
                                         <Form.Text
                                             className={this.getErrorTipClass('login', 'password')}>{this.getErrorTipText('login', 'password')}</Form.Text>
@@ -309,3 +336,6 @@ export default class Auth extends React.Component {
         </div>
     }
 }
+Auth.contextType = USER_AUTHORIZED;
+
+export default Auth;

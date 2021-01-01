@@ -3,6 +3,7 @@ import {Button, Col, Container, FormControl, Form, Row, OverlayTrigger, Tooltip}
 import {Animated} from 'react-animated-css'
 import {saveUserResult} from "../api/Utils";
 import Alert from 'react-s-alert';
+import {USER_AUTHORIZED} from "../constants";
 
 const LENGTH_NUMBER = 4;
 
@@ -122,9 +123,9 @@ class Game extends Component {
             this.setState({
                 endGame: true,
             });
-            if (this.props.authorized) {
+            if (this.context.authorized) {
                 saveUserResult({
-                    attempts: this.state.history.length,
+                    attempts: ++this.state.history.length,
                     number: this.state.guess.join('')
                 }).then(response => {
                     Alert.success("Результат сохранен");
@@ -281,5 +282,7 @@ class Game extends Component {
         </Col>;
     }
 }
+
+Game.contextType = USER_AUTHORIZED;
 
 export default Game;

@@ -4,8 +4,9 @@ import {Link} from "react-router-dom";
 import logo from "../images/logo-main.png";
 import '../HeaderAnimate.css';
 import Auth from './Auth';
+import {USER_AUTHORIZED} from "../constants";
 
-export default class Header extends React.Component {
+class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -52,13 +53,13 @@ export default class Header extends React.Component {
                             <Nav.Link as={Link} to={'/rating'}>
                                 Рейтинг
                             </Nav.Link>
-                            {!this.props.authorized && <Nav.Link>
+                            {!this.context.authorized && <Nav.Link>
                                  <Auth {...this.props}/>
                             </Nav.Link>}
-                            {this.props.authorized && <Nav.Link>
-                                {this.props.user.name}
+                            {this.context.authorized && <Nav.Link>
+                                {this.context.user.name}
                             </Nav.Link>}
-                            {this.props.authorized && <Nav.Link as={Link} to={'/logout'}>
+                            {this.context.authorized && <Nav.Link as={Link} to={'/logout'}>
                                 Выйти
                             </Nav.Link>}
                         </Nav>
@@ -69,4 +70,6 @@ export default class Header extends React.Component {
     }
 }
 
+Header.contextType = USER_AUTHORIZED;
 
+export default Header;

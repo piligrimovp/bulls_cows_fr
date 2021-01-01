@@ -2,8 +2,9 @@ import React from "react";
 import Header from "../components/Header";
 import {Col, Container, Form, Row, Table} from "react-bootstrap";
 import {getRatingAll, getRatingUser} from "../api/Utils";
+import {USER_AUTHORIZED} from "../constants";
 
-export default class Rating extends React.Component {
+class Rating extends React.Component {
     constructor(props) {
         super(props);
 
@@ -14,21 +15,24 @@ export default class Rating extends React.Component {
         }
     }
 
-    changeMode = (value) => {
-        let mode = value.target.checked ? 'user' : 'all';
+    changeMode = (e) => {
+        let mode = e.target.checked ? 'user' : 'all';
         this.setState({
             mode: mode
-        }).then(() => {
-            this.updateRecords();
         })
+        this.updateRecords(mode);
     }
 
     componentDidMount() {
         this.updateRecords();
     }
 
-    updateRecords = () => {
-        if (this.state.mode === 'user') {
+    updateRecords = (mode = this.state.mode) => {
+        if (!this.context.authorized) {
+            return;
+        }
+
+        if (mode === 'user') {
             this.setState({
                 loading: true
             })
@@ -43,7 +47,7 @@ export default class Rating extends React.Component {
                 })
             })
         }
-        if (this.state.mode === 'all') {
+        if (mode === 'all') {
             this.setState({
                 loading: true
             })
@@ -63,21 +67,22 @@ export default class Rating extends React.Component {
     render() {
         return (
             <section>
-                <Header authorized={this.props.authorized} user={this.props.user}/>
+                <Header/>
                 <main>
                     <Container>
-                        {!this.props.authorized && <h2 className={'text-center'}>Вы не авторизованы</h2>}
-                        {this.props.authorized && <Row>
+                        {!this.context.authorized && <h2 className={'text-center'}>Вы не авторизованы</h2>}
+                        {this.context.authorized && <Row>
                             <Col>
                                 <Form.Check
                                     type="switch"
                                     id="custom-switch"
                                     label="Вывести полный рейтинг/только мой"
+                                    checked={this.state.mode === 'user'}
                                     onChange={(e) => this.changeMode(e)}
                                 />
                             </Col>
                         </Row>}
-                        {this.props.authorized && <Table>
+                        {this.context.authorized && <Table>
                             <thead>
                             <tr>
                                 <td>№</td>
@@ -96,7 +101,7 @@ export default class Rating extends React.Component {
                             {
                                 !this.state.loading && this.state.records.map((e, i) => {
                                     return <tr key={i}>
-                                        <td>{e.user.id}</td>
+                                        <td>{1 + i}</td>
                                         <td>{e.user.name}</td>
                                         <td>{e.number}</td>
                                         <td>{e.attempts}</td>
@@ -112,3 +117,7 @@ export default class Rating extends React.Component {
         );
     }
 }
+
+Rating.contextType = USER_AUTHORIZED;
+
+export default Rating;
